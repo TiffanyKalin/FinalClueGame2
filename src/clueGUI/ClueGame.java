@@ -10,14 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 
 public class ClueGame extends JFrame {
 	
 	public ClueGame() {
 		Board board = new Board();
 		board.initialize();
-		JOptionPane.showMessageDialog(this, "You are Miss Scarlet, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 		add(board);
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -37,6 +35,7 @@ public class ClueGame extends JFrame {
 		JMenuItem item = new JMenuItem("Show Detective Notes");
 		class MenuItemListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {	
+					System.out.println("alskdjfalksd");
 					createDetectiveNotes();
 				}
 	

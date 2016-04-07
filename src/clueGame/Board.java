@@ -57,6 +57,9 @@ public class Board extends JPanel {
 		return playingCards;
 	}
 	
+	public void drawBoard() {
+		
+	}
 	
 	public void paintComponent(Graphics g) {		
 		super.paintComponent(g);
@@ -76,7 +79,7 @@ public class Board extends JPanel {
 	//ADD constructor
 
 	public Board() {
-		boardConfigFile = "ClueConfigFile.csv";
+		boardConfigFile = "ClueLayout.csv";
 		roomConfigFile = "Legend.txt";
 		
 	}
@@ -237,26 +240,28 @@ public class Board extends JPanel {
 
 	public void calcAdjacencies(){
 		adjList = new HashMap<BoardCell, LinkedList<BoardCell>>();
+
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < columns; j++){
-				LinkedList<BoardCell> possibleAdjList = new LinkedList<BoardCell>();
+				LinkedList<BoardCell> toadd = new LinkedList<BoardCell>();
 				if(board[i][j].getInitial() == 'W' || board[i][j].isDoorway()){
+
 					if(checkNeighbor(i-1,j, DoorDirection.DOWN)){
-						possibleAdjList.add(board[i - 1][j]);
+						toadd.add(board[i - 1][j]);
 					}
 					if (checkNeighbor(i+1,j, DoorDirection.UP)) {
-						possibleAdjList.add(board[i + 1][j]);
+						toadd.add(board[i + 1][j]);
 					}
 					if (checkNeighbor(i,j-1, DoorDirection.RIGHT)) {
-						possibleAdjList.add(board[i][j - 1]);
+						toadd.add(board[i][j - 1]);
 					}
 					if (checkNeighbor(i,j+1, DoorDirection.LEFT)) {
-						possibleAdjList.add(board[i][j + 1]);
+						toadd.add(board[i][j + 1]);
 					}
 
 				}
 
-				adjList.put(board[i][j], possibleAdjList);
+				adjList.put(board[i][j], toadd);
 				//System.out.println(adjList.size());
 			}
 		}
@@ -366,7 +371,8 @@ public class Board extends JPanel {
 	}
 	
 	public void dealCards() {
-	
+		String[] criteria = new String[3];
+		boolean solutionFound = false;
 		Random rand = new Random();
 		int randomNum = rand.nextInt(roomCards.size());
 		String roomSolution = roomCards.get(randomNum).getCardName();
@@ -399,6 +405,10 @@ public class Board extends JPanel {
 			player++;
 			if (player >= players.size()) player = 0;
 		}
+	}
+	
+	public void selectAnswer() {
+		
 	}
 	
 	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {
