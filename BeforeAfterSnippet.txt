@@ -1,0 +1,13 @@
+Fixed constructor for right config file name. Before:
+public Board() {
+		boardConfigFile = "ClueLayout.csv";
+		roomConfigFile = "Legend.txt";
+		
+	}
+
+Fixed constructor for right config file name. After:
+public Board() {
+		boardConfigFile = "ClueConfigFile.csv";
+		roomConfigFile = "Legend.txt";
+		
+	}
