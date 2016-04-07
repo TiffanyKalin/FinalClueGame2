@@ -239,25 +239,24 @@ public class Board extends JPanel {
 		adjList = new HashMap<BoardCell, LinkedList<BoardCell>>();
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < columns; j++){
-				LinkedList<BoardCell> toadd = new LinkedList<BoardCell>();
-System.out.println("in");
+				LinkedList<BoardCell> possibleAdjList = new LinkedList<BoardCell>();
 				if(board[i][j].getInitial() == 'W' || board[i][j].isDoorway()){
 					if(checkNeighbor(i-1,j, DoorDirection.DOWN)){
-						toadd.add(board[i - 1][j]);
+						possibleAdjList.add(board[i - 1][j]);
 					}
 					if (checkNeighbor(i+1,j, DoorDirection.UP)) {
-						toadd.add(board[i + 1][j]);
+						possibleAdjList.add(board[i + 1][j]);
 					}
 					if (checkNeighbor(i,j-1, DoorDirection.RIGHT)) {
-						toadd.add(board[i][j - 1]);
+						possibleAdjList.add(board[i][j - 1]);
 					}
 					if (checkNeighbor(i,j+1, DoorDirection.LEFT)) {
-						toadd.add(board[i][j + 1]);
+						possibleAdjList.add(board[i][j + 1]);
 					}
 
 				}
 
-				adjList.put(board[i][j], toadd);
+				adjList.put(board[i][j], possibleAdjList);
 				//System.out.println(adjList.size());
 			}
 		}
@@ -367,8 +366,7 @@ System.out.println("in");
 	}
 	
 	public void dealCards() {
-		String[] criteria = new String[3];
-		boolean solutionFound = false;
+	
 		Random rand = new Random();
 		int randomNum = rand.nextInt(roomCards.size());
 		String roomSolution = roomCards.get(randomNum).getCardName();
