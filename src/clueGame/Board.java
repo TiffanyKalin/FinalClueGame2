@@ -237,12 +237,11 @@ public class Board extends JPanel {
 
 	public void calcAdjacencies(){
 		adjList = new HashMap<BoardCell, LinkedList<BoardCell>>();
-
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < columns; j++){
 				LinkedList<BoardCell> toadd = new LinkedList<BoardCell>();
+System.out.println("in");
 				if(board[i][j].getInitial() == 'W' || board[i][j].isDoorway()){
-
 					if(checkNeighbor(i-1,j, DoorDirection.DOWN)){
 						toadd.add(board[i - 1][j]);
 					}
