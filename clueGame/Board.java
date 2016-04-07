@@ -57,9 +57,6 @@ public class Board extends JPanel {
 		return playingCards;
 	}
 	
-	public void drawBoard() {
-		
-	}
 	
 	public void paintComponent(Graphics g) {		
 		super.paintComponent(g);
