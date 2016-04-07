@@ -1,7 +1,7 @@
 C, Conservatory, Card
 A, Kitchen, Card
 B, Ballroom, Card
-F, Billiards, Card
+R, Billiards, Card
 I, Library, Card
 G, Study, Card
 D, Dining, Card

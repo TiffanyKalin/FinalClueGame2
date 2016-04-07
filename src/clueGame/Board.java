@@ -76,7 +76,7 @@ public class Board extends JPanel {
 	//ADD constructor
 
 	public Board() {
-		boardConfigFile = "ClueLayout.csv";
+		boardConfigFile = "ClueConfigFile.csv";
 		roomConfigFile = "Legend.txt";
 		
 	}
