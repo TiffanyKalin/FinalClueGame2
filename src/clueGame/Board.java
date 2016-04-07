@@ -401,10 +401,6 @@ public class Board extends JPanel {
 		}
 	}
 	
-	public void selectAnswer() {
-		
-	}
-	
 	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {
 		Card card = null;
 		boolean started = false;
