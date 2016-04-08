@@ -3,20 +3,39 @@ package clueGUI;
 import clueGame.*;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Vector;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
 	
 	public ClueGame() {
+		//setLayout(new GridLayout(1, 2));
 		Board board = new Board();
 		board.initialize();
-		add(board);
+		Set<Card> humanCards = new HashSet<Card>();
+		humanCards = board.getHumanPlayer().getMyCards();
+		JPanel cardPanel = new JPanel();
+		cardPanel = this.createCards(humanCards);
+		JOptionPane.showMessageDialog(this, "You are Miss Scarlet, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		add(board, BorderLayout.CENTER);
+		add(cardPanel, BorderLayout.EAST);
+		Clue_GUI control = new Clue_GUI();
+		add(control, BorderLayout.SOUTH);
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
@@ -69,12 +88,47 @@ public class ClueGame extends JFrame {
 
 		return item;
 	}
+	
+	private JPanel createCards(Set<Card> humanCards){
+		JPanel cardPanel = new JPanel();
+		cardPanel.setSize(200, 100);
+		cardPanel.setLayout(new GridLayout(6, 1));
+		JLabel peopleLabel = new JLabel("People");
+		JLabel roomLabel = new JLabel("Rooms");
+		JLabel weaponLabel = new JLabel("Weapons");
+		
+		JTextField peopleField = new JTextField();
+		JTextField RoomsField = new JTextField();
+		JTextField WeaponsField = new JTextField();
+		for (Card c : humanCards) {
+			if (c.getCardType() == CardType.PERSON) {
+				peopleField = new JTextField(c.getCardName());
+				peopleField.setBorder(new TitledBorder (new EtchedBorder(), "People"));
+				cardPanel.add(peopleField);
+			}
+			if (c.getCardType() == CardType.ROOM) {
+				RoomsField = new JTextField(c.getCardName());
+				RoomsField.setBorder(new TitledBorder (new EtchedBorder(), "Room"));
+				cardPanel.add(RoomsField);
+			}
+			if (c.getCardType() == CardType.WEAPON) {
+				WeaponsField = new JTextField(c.getCardName());
+				WeaponsField.setBorder(new TitledBorder (new EtchedBorder(), "Weapon"));
+				cardPanel.add(WeaponsField);
+			}
+		}
+
+		cardPanel.setBorder(new TitledBorder (new EtchedBorder(), "Cards"));
+		return cardPanel;
+		
+		
+	}
 
 	public static void main(String[] args) {
 		ClueGame clue = new ClueGame();
 
 		clue.setVisible(true);
-		clue.setSize(600, 600);
+		clue.setSize(800, 600);
 		clue.setTitle("Clue Game");
 		
 		

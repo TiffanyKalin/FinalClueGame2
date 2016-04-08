@@ -50,7 +50,7 @@ public class Board extends JPanel {
 	private Vector<Card> weaponCards;
 	private Vector<Card> playerCards;
 	private Vector<Card> roomCards;
-	private HumanPlayer humanPlayer;
+	private Player humanPlayer;
 	Vector<Card> undealt;
 
 	public Set<Card> getPlayingCards() {
@@ -346,6 +346,9 @@ public class Board extends JPanel {
 				weaponCards.add(new Card(name.trim(), CardType.WEAPON));
 				playingCards.add(new Card(name.trim(), CardType.WEAPON));
 			}
+			setHumanPlayer(players.get(0));
+			
+			this.setHumanPlayer(humanPlayer);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		} catch (IOException e) {
@@ -475,12 +478,16 @@ public class Board extends JPanel {
 		players.addAll(people);
 	}
 	
-	public void setHumanPlayer(HumanPlayer humanPlayer) {
+	public void setHumanPlayer(Player humanPlayer) {
 		this.humanPlayer = humanPlayer;
 	}
 
 	public Vector<Card> getUndealt() {
 		return undealt;
+	}
+
+	public Player getHumanPlayer() {
+		return humanPlayer;
 	}
 	
 	
