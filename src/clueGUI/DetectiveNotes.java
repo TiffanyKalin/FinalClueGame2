@@ -28,18 +28,6 @@ public class DetectiveNotes extends JDialog {
 		setVisible(true);
 	}
 	
-	/*public static void main(String[] args) {
-		// Create a layout with 2 rows
-		//JFrame frame = new JFrame();
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.setSize(750, 200);	
-		// Create the JPanel and add it to the JFrame
-		DetectiveNotes gui = new DetectiveNotes();		
-		gui.setVisible(true);
-		//frame.add(gui, BorderLayout.CENTER);
-		// Now let's view it
-	}*/
-	
 	private JPanel createPersonGuessPanel() {
 		JPanel panel = new JPanel();
 		JComboBox guess = new JComboBox();

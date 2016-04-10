@@ -54,7 +54,6 @@ public class ClueGame extends JFrame {
 		JMenuItem item = new JMenuItem("Show Detective Notes");
 		class MenuItemListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {	
-					System.out.println("alskdjfalksd");
 					createDetectiveNotes();
 				}
 	
@@ -65,14 +64,14 @@ public class ClueGame extends JFrame {
 		}
 		
 	private void createDetectiveNotes() {
-		JFrame frame = new JFrame();		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(750, 200);	
+		//JFrame frame = new JFrame();		
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setSize(750, 200);	
 		// Create the JPanel and add it to the JFrame
 		DetectiveNotes gui = new DetectiveNotes();		
 		gui.setVisible(true);		
-		frame.add(gui, BorderLayout.CENTER);
-		frame.setVisible(true);
+		//frame.add(gui, BorderLayout.CENTER);
+		//frame.setVisible(true);
 		// Now let's view it
 	}
 	private JMenuItem createFileExitItem() {
