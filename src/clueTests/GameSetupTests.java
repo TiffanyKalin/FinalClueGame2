@@ -37,11 +37,11 @@ public class GameSetupTests {
 		assertEquals("Miss Scarlett", board.getPlayers().get(0).getPlayerName());
 		assertEquals(Color.red, board.getPlayers().get(0).getColor());
 	    assertEquals(0, board.getPlayers().get(0).getRow());
-		assertEquals(6, board.getPlayers().get(0).getColumn());
+		assertEquals(5, board.getPlayers().get(0).getColumn());
 	
 		//two computer players
 		assertEquals("Colonel Mustard", board.getPlayers().get(4).getPlayerName());
-		assertEquals(Color.yellow, board.getPlayers().get(4).getColor());
+		assertEquals(Color.black, board.getPlayers().get(4).getColor());
 		assertEquals(19, board.getPlayers().get(4).getRow());
 		assertEquals(13, board.getPlayers().get(4).getColumn());
 		

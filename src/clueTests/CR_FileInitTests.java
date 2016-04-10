@@ -33,7 +33,7 @@ public class CR_FileInitTests {
 	public static void setUp() {
 		// Create a new Board using the valid files. Note that
 		// the default filenames must be attributes of the Board class. 
-		board = new Board();
+		board = new Board("ClueConfigFile.csv", "Legend.txt");
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
@@ -47,7 +47,7 @@ public class CR_FileInitTests {
 		// from the hash, including the first and last in the file and a few others
 		assertEquals("Conservatory", rooms.get('C'));
 		assertEquals("Ballroom", rooms.get('B'));
-		assertEquals("Billiards", rooms.get('R'));
+		assertEquals("Billiards", rooms.get('F'));
 		assertEquals("Dining", rooms.get('D'));
 		assertEquals("Walkway", rooms.get('W'));
 	}

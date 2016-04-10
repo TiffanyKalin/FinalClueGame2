@@ -128,7 +128,7 @@ public class ClueGame extends JFrame {
 		ClueGame clue = new ClueGame();
 
 		clue.setVisible(true);
-		clue.setSize(800, 600);
+		clue.setSize(800, 850);
 		clue.setTitle("Clue Game");
 		
 		
