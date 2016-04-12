@@ -50,7 +50,7 @@ public class Board extends JPanel {
 	private Vector<Card> weaponCards;
 	private Vector<Card> playerCards;
 	private Vector<Card> roomCards;
-	private Player humanPlayer;
+	private HumanPlayer humanPlayer;
 	Vector<Card> undealt;
 
 	public Set<Card> getPlayingCards() {
@@ -323,7 +323,11 @@ public class Board extends JPanel {
 				color = line.split(", ")[1];	
 				row = Integer.parseInt(line.split(", ")[2]);	
 				col = Integer.parseInt(line.split(", ")[3]);
-				players.add(new Player(name, color, row, col));
+				if (players.size() < 1) {
+					players.add(new HumanPlayer(name, color, row, col));
+				}
+				else 
+					players.add(new ComputerPlayer(name, color, row, col));
 				playerCards.add(new Card(name.trim(), CardType.PERSON));
 				playingCards.add(new Card(name.trim(), CardType.PERSON));
 			}
@@ -475,14 +479,15 @@ public class Board extends JPanel {
 	}
 	
 	public void setHumanPlayer(Player humanPlayer) {
-		this.humanPlayer = humanPlayer;
+		//HumanPlayer hPlayer = new HumanPlayer(humanPlayer.getPlayerName(), humanPlayer.getColor().toString(), humanPlayer.getRow(), humanPlayer.getColumn());
+		this.humanPlayer = (HumanPlayer) humanPlayer;
 	}
 
 	public Vector<Card> getUndealt() {
 		return undealt;
 	}
 
-	public Player getHumanPlayer() {
+	public HumanPlayer getHumanPlayer() {
 		return humanPlayer;
 	}
 	

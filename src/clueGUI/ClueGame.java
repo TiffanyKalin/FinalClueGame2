@@ -22,6 +22,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
+	boolean humanMustFinish;
 	
 	public ClueGame() {
 		//setLayout(new GridLayout(1, 2));
@@ -34,11 +35,12 @@ public class ClueGame extends JFrame {
 		JOptionPane.showMessageDialog(this, "You are Miss Scarlet, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 		add(board, BorderLayout.CENTER);
 		add(cardPanel, BorderLayout.EAST);
-		Clue_GUI control = new Clue_GUI();
+		Clue_GUI control = new Clue_GUI(this);
 		add(control, BorderLayout.SOUTH);
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
+		humanMustFinish = true;
 	}
 
 	private JMenu createFileMenu() {
@@ -121,6 +123,12 @@ public class ClueGame extends JFrame {
 		return cardPanel;
 		
 		
+	}
+	
+	public void NextPlayer() {
+		if (humanMustFinish) {
+			JOptionPane.showMessageDialog(this, "Stop! Human Player Must Finish!", "Clue", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	public static void main(String[] args) {

@@ -2,6 +2,11 @@ package clueGUI;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,16 +14,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import clueGUI.ClueGame;
 
 public class Clue_GUI extends JPanel {
 	private JTextField turnText;
 	private JTextField dieText;
 	private JTextField guessText;
 	private JTextField resultText;
+	private ClueGame game;
 
-	public Clue_GUI()
+	public Clue_GUI(ClueGame game)
 	{
 		// Create a layout with 2 rows
+		this.game = game;
 		setLayout(new GridLayout(3,2));
 		JPanel panel = createTurnPanel();
 		add(panel);
@@ -63,8 +71,26 @@ public class Clue_GUI extends JPanel {
 		panel.setLayout(new GridLayout(1, 4));
 		panel.add(nextButton);
 		panel.add(accusationButton);
+		nextButton.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				game.NextPlayer();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {}
+			@Override
+			public void mouseExited(MouseEvent arg0) {}
+			@Override
+			public void mousePressed(MouseEvent arg0) {}
+			@Override
+			public void mouseReleased(MouseEvent arg0) {}
+	}); 
 		return panel;
 	}
+
 	
 	private JPanel createGuessPanel() {
 		JPanel panel = new JPanel();
@@ -88,7 +114,7 @@ public class Clue_GUI extends JPanel {
 		return panel;
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		// Create a JFrame with all the normal functionality
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,7 +124,7 @@ public class Clue_GUI extends JPanel {
 		frame.add(gui, BorderLayout.CENTER);
 		// Now let's view it
 		frame.setVisible(true);
-	}
+	}*/
 
 
 }
