@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 import java.util.Vector;
+import clueGame.*;
 
 public class ComputerPlayer extends Player{
 	private char lastVisited;	
@@ -98,5 +99,15 @@ public class ComputerPlayer extends Player{
 	
 	public void setLastVisited(char visited) {
 		lastVisited = visited;
+	}
+	
+	@Override
+	public void makeMove(Board board, Set<BoardCell> targets) {
+		for (BoardCell b : targets) {
+			System.out.println(b.getInitial());
+		}
+		BoardCell newCell = this.pickLocation(targets);
+		this.column = newCell.getColumn();
+		board.repaint();
 	}
 }

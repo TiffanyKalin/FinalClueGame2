@@ -17,8 +17,8 @@ import javax.swing.border.TitledBorder;
 import clueGUI.ClueGame;
 
 public class Clue_GUI extends JPanel {
-	private JTextField turnText;
-	private JTextField dieText;
+	public JTextField turnText;
+	public JTextField dieText;
 	private JTextField guessText;
 	private JTextField resultText;
 	private ClueGame game;
@@ -40,7 +40,7 @@ public class Clue_GUI extends JPanel {
 		add(panel);
 	}
 
-	 private JPanel createTurnPanel() {
+	 public JPanel createTurnPanel() {
 		 	JPanel panel = new JPanel();
 		 	// Use a grid layout, 1 row, 2 elements (label, text)	
 		 	JLabel nameLabel = new JLabel("Whose turn?");
@@ -52,7 +52,7 @@ public class Clue_GUI extends JPanel {
 			return panel;
 	}
 	 
-	 private JPanel createDiePanel() {
+	 public JPanel createDiePanel() {
 		 JPanel panel = new JPanel();
 		 JLabel nameLabel = new JLabel("Roll");
 		 dieText = new JTextField(5);
@@ -63,7 +63,7 @@ public class Clue_GUI extends JPanel {
 		 return panel;
 	 }
 	 
-	private JPanel createButtonPanel() {
+	public JPanel createButtonPanel() {
 		// no layout specified, so this is flow
 		JButton nextButton = new JButton("Next Player");
 		JButton accusationButton = new JButton("Make Accusation");
@@ -92,7 +92,7 @@ public class Clue_GUI extends JPanel {
 	}
 
 	
-	private JPanel createGuessPanel() {
+	public JPanel createGuessPanel() {
 		JPanel panel = new JPanel();
 		JLabel nameLabel =  new JLabel("Guess");
 		guessText = new JTextField(15);
@@ -102,7 +102,7 @@ public class Clue_GUI extends JPanel {
 		return panel;
 	}
 	
-	private JPanel createResultPanel() {
+	public JPanel createResultPanel() {
 		JPanel panel = new JPanel();
 		JLabel guessLabel =  new JLabel("Guess");
 		guessLabel = new JLabel("Response");

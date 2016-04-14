@@ -86,4 +86,9 @@ public class Player {
 	public void seeCard(Card card) {
 		this.seenCards.add(card);
 	}
+
+	public void makeMove(Board board, Set<BoardCell> targets) {
+		// TODO Auto-generated method stub
+		
+	}
 }

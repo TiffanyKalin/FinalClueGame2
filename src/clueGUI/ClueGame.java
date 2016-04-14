@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.Vector;
 
@@ -23,10 +24,15 @@ import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
 	boolean humanMustFinish;
+	Clue_GUI control;
+	Board board;
+	Player currentPlayer;
+	int currentPlayerNum;
+	int dieRoll;
 	
 	public ClueGame() {
 		//setLayout(new GridLayout(1, 2));
-		Board board = new Board();
+		board = new Board();
 		board.initialize();
 		Set<Card> humanCards = new HashSet<Card>();
 		humanCards = board.getHumanPlayer().getMyCards();
@@ -35,12 +41,14 @@ public class ClueGame extends JFrame {
 		JOptionPane.showMessageDialog(this, "You are Miss Scarlet, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 		add(board, BorderLayout.CENTER);
 		add(cardPanel, BorderLayout.EAST);
-		Clue_GUI control = new Clue_GUI(this);
+		control = new Clue_GUI(this);
 		add(control, BorderLayout.SOUTH);
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
 		humanMustFinish = true;
+		currentPlayer = board.getPlayers().get(0);
+		currentPlayerNum = 0;
 	}
 
 	private JMenu createFileMenu() {
@@ -126,9 +134,30 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void NextPlayer() {
-		if (humanMustFinish) {
+		/*if (humanMustFinish) {
 			JOptionPane.showMessageDialog(this, "Stop! Human Player Must Finish!", "Clue", JOptionPane.INFORMATION_MESSAGE);
+		}*/
+		
+		currentPlayer = board.getPlayers().get(currentPlayerNum);
+		Random rand = new Random();
+		dieRoll = rand.nextInt(5) + 1;
+		control.dieText.setText(Integer.toString(dieRoll));
+		control.turnText.setText(currentPlayer.getPlayerName());
+		board.calcTargets(currentPlayer.getRow(), currentPlayer.getColumn(), dieRoll);
+		
+		if (currentPlayerNum == 0) {
+			//human
 		}
+		else {
+			//((ComputerPlayer)board.getPlayers().get(currentPlayerNum)).makeMove();
+			board.getPlayers().get(currentPlayerNum).makeMove(board, board.getTargets());
+		}
+
+		currentPlayerNum++;
+		if (currentPlayerNum == 6) {
+			currentPlayerNum = 0;
+		}
+		
 	}
 
 	public static void main(String[] args) {
