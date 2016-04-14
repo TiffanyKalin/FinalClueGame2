@@ -66,7 +66,7 @@ public class GameActionTests {
 	@Test
 	public void testDisproveSuggestionCorrectMatch() {
 		//create one player and deal six specific cards to that player
-		Player redPlayer = new Player("Miss Scarlett", "red", 1, 1);
+		Player redPlayer = new HumanPlayer("Miss Scarlett", "red", 1, 1);
 		redPlayer.addCardToHand(daggerCard);
 		redPlayer.addCardToHand(ropeCard);
 		redPlayer.addCardToHand(studyCard);
@@ -87,7 +87,7 @@ public class GameActionTests {
 	@Test
 	public void testDisproveSuggestionRandomChoice() {
 		//create one player and deal six specific cards to that player
-		Player redPlayer = new Player("Miss Scarlett", "red", 1, 1);
+		Player redPlayer = new HumanPlayer("Miss Scarlett", "red", 1, 1);
 		redPlayer.addCardToHand(daggerCard);
 		redPlayer.addCardToHand(ropeCard);
 		redPlayer.addCardToHand(studyCard);
@@ -131,7 +131,7 @@ public class GameActionTests {
 		//create computer players, deal specific cards, create human player
 		Vector<Player> playerList = new Vector<Player>();
 		for (int i = 0; i < 5; i++) {
-			playerList.add(new Player("computer" + i, "red", i, i));
+			playerList.add(new ComputerPlayer("computer" + i, "red", i, i));
 		}
 		playerList.get(0).addCardToHand(scarlettCard);
 		playerList.get(1).addCardToHand(studyCard);

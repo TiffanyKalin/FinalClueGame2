@@ -102,9 +102,10 @@ public class ComputerPlayer extends Player{
 	}
 	
 	@Override
-	public void makeMove(Set<BoardCell> targets) {
+	public void makeMove(Board board, Set<BoardCell> targets) {
 		BoardCell newCell = this.pickLocation(targets);
-		this.row = newCell.getRow();
-		this.column = newCell.getColumn();
+		this.row = newCell.getColumn();
+		this.column = newCell.getRow();
+		ClueGame.humanMustFinish = false;
 	}
 }

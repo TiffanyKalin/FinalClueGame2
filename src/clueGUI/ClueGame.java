@@ -23,7 +23,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
-	boolean humanMustFinish;
+	public static boolean humanMustFinish;
 	Clue_GUI control;
 	Board board;
 	Player currentPlayer;
@@ -46,7 +46,7 @@ public class ClueGame extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
-		humanMustFinish = true;
+		humanMustFinish = false;
 		currentPlayer = board.getPlayers().get(0);
 		currentPlayerNum = 0;
 	}
@@ -134,10 +134,11 @@ public class ClueGame extends JFrame {
 	}
 	
 	public void NextPlayer() {
-		/*if (humanMustFinish) {
+		
+		if (board.isHumanMustFinish()) {
 			JOptionPane.showMessageDialog(this, "Stop! Human Player Must Finish!", "Clue", JOptionPane.INFORMATION_MESSAGE);
-		}*/
-		System.out.println(humanMustFinish);
+			return; 
+		}
 		currentPlayer = board.getPlayers().get(currentPlayerNum);
 		Random rand = new Random();
 		dieRoll = rand.nextInt(6) + 1;
@@ -150,22 +151,7 @@ public class ClueGame extends JFrame {
 		for (BoardCell b : board.getTargets()) {
 			//System.out.println(b.getRow() + " " + b.getColumn());
 		}
-		
-		if (currentPlayerNum == 0) {
-			 int initialRow;
-			 int initialColumn;
-				initialRow = board.getHumanPlayer().getRow();
-				initialColumn = board.getHumanPlayer().getColumn();
-			board.getHumanPlayer().makeMove(board, board.getTargets());
-			if (board.validTargetSelected)
-				humanMustFinish = false;
-			
-		}
-		else {
-			//((ComputerPlayer)board.getPlayers().get(currentPlayerNum)).makeMove();
-			board.getPlayers().get(currentPlayerNum).makeMove(board.getTargets());
-			
-		}
+		board.getPlayers().get(currentPlayerNum).makeMove(board, board.getTargets());
 		
 		board.repaint();
 

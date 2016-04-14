@@ -13,9 +13,7 @@ public class HumanPlayer extends Player {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void makeMove(Board board, Set<BoardCell> targets) {
-	
+	public void makeMove(Board board, Set<BoardCell> targets) {	
 		board.highlightTargets(targets);
-		
 	}
 }

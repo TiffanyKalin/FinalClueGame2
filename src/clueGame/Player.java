@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.Vector;
 import java.lang.reflect.Field;
 
-public class Player {
+public abstract class Player {
 	String playerName;
 	int row;
 	int column;
@@ -95,8 +95,9 @@ public class Player {
 		this.seenCards.add(card);
 	}
 
-	public void makeMove(Set<BoardCell> targets) {
+	public void makeMove(Board board, Set<BoardCell> targets) {
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

@@ -57,7 +57,11 @@ public class Board extends JPanel implements MouseListener{
 	private Vector<Card> roomCards;
 	private HumanPlayer humanPlayer;
 	Vector<Card> undealt;
-	public boolean validTargetSelected;
+	boolean humanMustFinish;
+
+	public boolean isHumanMustFinish() {
+		return humanMustFinish;
+	}
 
 	public Board() {
 		boardConfigFile = "ClueConfigFile.csv";
@@ -76,6 +80,7 @@ public class Board extends JPanel implements MouseListener{
 	}
 
 	public void initialize(){
+		humanMustFinish = false;
 		playingCards = new HashSet<Card>();
 		//load room config file
 		try {
@@ -429,7 +434,7 @@ public class Board extends JPanel implements MouseListener{
 			}
 		}
 		repaint();
-		validTargetSelected = false;
+		humanMustFinish = true;
 		//System.out.println(humanPlayer.getRow() + humanPlayer.getColumn());
 		addMouseListener(this);
 		//System.out.println(humanPlayer.getRow() + humanPlayer.getColumn());
@@ -515,7 +520,6 @@ public class Board extends JPanel implements MouseListener{
 			}
 		}
 		
-		
 		// display some information just to show whether a box was clicked
 		if (whichBox != null){
 			humanPlayer.setColumn(whichBox.getRow());
@@ -523,8 +527,8 @@ public class Board extends JPanel implements MouseListener{
 				for (BoardCell b: targetCells) {
 					b.setHighlight(false);
 				}
-				validTargetSelected = true;
 				repaint();
+			humanMustFinish = false;
 		}
 		
 		else
