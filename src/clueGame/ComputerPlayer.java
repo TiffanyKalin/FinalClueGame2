@@ -16,7 +16,7 @@ public class ComputerPlayer extends Player{
 	}
 
 	public BoardCell pickLocation(Set<BoardCell> targets) {
-		Vector<BoardCell> possibleTargets = new Vector<BoardCell>();		
+		Vector<BoardCell> possibleTargets = new Vector<BoardCell>();
 		for (BoardCell c : targets) {
 			if (c.isDoorway() && c.getInitial() != lastVisited)
 				return c;
@@ -103,10 +103,8 @@ public class ComputerPlayer extends Player{
 	
 	@Override
 	public void makeMove(Board board, Set<BoardCell> targets) {
-		for (BoardCell b : targets) {
-			System.out.println(b.getInitial());
-		}
 		BoardCell newCell = this.pickLocation(targets);
+		this.row = newCell.getRow();
 		this.column = newCell.getColumn();
 		board.repaint();
 	}

@@ -140,11 +140,13 @@ public class ClueGame extends JFrame {
 		
 		currentPlayer = board.getPlayers().get(currentPlayerNum);
 		Random rand = new Random();
-		dieRoll = rand.nextInt(5) + 1;
+		dieRoll = rand.nextInt(6) + 1;
 		control.dieText.setText(Integer.toString(dieRoll));
 		control.turnText.setText(currentPlayer.getPlayerName());
 		board.calcTargets(currentPlayer.getRow(), currentPlayer.getColumn(), dieRoll);
-		
+		for (BoardCell b : board.getTargets()) {
+			System.out.println(b.getRow() + " " + b.getColumn());
+		}
 		if (currentPlayerNum == 0) {
 			//human
 		}
