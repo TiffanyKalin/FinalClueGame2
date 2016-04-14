@@ -53,27 +53,6 @@ public class Board extends JPanel {
 	private HumanPlayer humanPlayer;
 	Vector<Card> undealt;
 
-	public Set<Card> getPlayingCards() {
-		return playingCards;
-	}
-	
-	public void paintComponent(Graphics g) {		
-		super.paintComponent(g);
-		for (int row = 0; row < rows; row++) {
-			for (int col = 0; col < columns; col++) {
-				board[row][col].draw(g);				
-			}
-		}
-		for (Player p : players) {
-			int x = p.getColumn();
-			int y = p.getRow();
-			Color c = p.getColor();
-			board[x][y].drawPlayer(g, c);
-		}
-	}
-
-	//ADD constructor
-
 	public Board() {
 		boardConfigFile = "ClueConfigFile.csv";
 		roomConfigFile = "Legend.txt";
@@ -136,8 +115,6 @@ public class Board extends JPanel {
 	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException{
 		loadBoardConfig(boardConfigFile);
 	}
-
-
 
 	public void loadRoomConfig(String roomConfigFile) throws BadConfigFormatException, FileNotFoundException{
 		FileReader reader = new FileReader(roomConfigFile);
@@ -212,15 +189,7 @@ public class Board extends JPanel {
 
 	}
 
-
-
-	public LinkedList<BoardCell> getAdjList(int row, int column) {
-		return adjList.get(board[row][column]);
-	}
-
-
-
-	public boolean checkNeighbor(int row, int col, DoorDirection direction){
+	/*public boolean checkNeighbor(int row, int col, DoorDirection direction){
 		if(row < 0 || row > rows - 1 ||  col < 0 || col > columns - 1) {
 			return false;
 		}
@@ -264,11 +233,6 @@ public class Board extends JPanel {
 
 	}
 
-	public BoardCell getCellAt(int row, int column){
-		BoardCell cellTest = board[row][column];		
-		return cellTest;
-	}
-
 
 	public void findAllTargets(BoardCell cell, int numSteps){
 		LinkedList<BoardCell> adjacents = new LinkedList<BoardCell>();
@@ -304,7 +268,7 @@ public class Board extends JPanel {
 		if(startCell != null){
 			findAllTargets(startCell,pathLength);
 		}
-	}
+	}*/
 	
 	public void loadConfigFiles()  {
 		playerCards = new Vector<Card>();
@@ -410,10 +374,6 @@ public class Board extends JPanel {
 		}
 	}
 	
-	public void selectAnswer() {
-		
-	}
-	
 	public Card handleSuggestion(Solution suggestion, String accusingPlayer, BoardCell clicked) {
 		Card card = null;
 		boolean started = false;
@@ -439,6 +399,21 @@ public class Board extends JPanel {
 	
 	public boolean checkAccusation(Solution accusation) {
 		return (accusation.equals(theAnswer));
+	}
+	
+	public void paintComponent(Graphics g) {		
+		super.paintComponent(g);
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < columns; col++) {
+				board[row][col].draw(g);				
+			}
+		}
+		for (Player p : players) {
+			int x = p.getColumn();
+			int y = p.getRow();
+			Color c = p.getColor();
+			board[x][y].drawPlayer(g, c);
+		}
 	}
 
 	public Set<BoardCell> getTargets(){
@@ -491,5 +466,17 @@ public class Board extends JPanel {
 		return humanPlayer;
 	}
 	
+	public BoardCell getCellAt(int row, int column){
+		BoardCell cellTest = board[row][column];		
+		return cellTest;
+	}
+	
+	public LinkedList<BoardCell> getAdjList(int row, int column) {
+		return adjList.get(board[row][column]);
+	}
+	
+	public Set<Card> getPlayingCards() {
+		return playingCards;
+	}
 	
 }
