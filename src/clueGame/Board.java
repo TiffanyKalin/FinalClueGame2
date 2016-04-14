@@ -3,17 +3,22 @@ package clueGame;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseListener;
 import java.awt.Graphics;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
+import com.sun.glass.events.MouseEvent;
 
 import java.util.Random;
 import java.io.BufferedReader;
@@ -29,7 +34,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Vector;
 
-public class Board extends JPanel {
+public class Board extends JPanel implements MouseListener{
 
 	public static final int MAX_BOARD_SIZE = 50;
 	private BoardCell[][] board;
@@ -52,6 +57,7 @@ public class Board extends JPanel {
 	private Vector<Card> roomCards;
 	private HumanPlayer humanPlayer;
 	Vector<Card> undealt;
+	public boolean validTargetSelected;
 
 	public Board() {
 		boardConfigFile = "ClueConfigFile.csv";
@@ -189,7 +195,7 @@ public class Board extends JPanel {
 
 	}
 
-	/*public boolean checkNeighbor(int row, int col, DoorDirection direction){
+	public boolean checkNeighbor(int row, int col, DoorDirection direction){
 		if(row < 0 || row > rows - 1 ||  col < 0 || col > columns - 1) {
 			return false;
 		}
@@ -268,7 +274,7 @@ public class Board extends JPanel {
 		if(startCell != null){
 			findAllTargets(startCell,pathLength);
 		}
-	}*/
+	}
 	
 	public void loadConfigFiles()  {
 		playerCards = new Vector<Card>();
@@ -416,6 +422,20 @@ public class Board extends JPanel {
 		}
 	}
 
+	public void highlightTargets(Set<BoardCell> targets) {
+		if (targets != null) {
+			for (BoardCell b: targets) {
+				b.setHighlight(true);
+			}
+		}
+		repaint();
+		validTargetSelected = false;
+		//System.out.println(humanPlayer.getRow() + humanPlayer.getColumn());
+		addMouseListener(this);
+		//System.out.println(humanPlayer.getRow() + humanPlayer.getColumn());
+		
+	}
+	
 	public Set<BoardCell> getTargets(){
 		return targetCells;
 	}
@@ -478,5 +498,39 @@ public class Board extends JPanel {
 	public Set<Card> getPlayingCards() {
 		return playingCards;
 	}
-	
+
+	@Override
+	public void mouseClicked(java.awt.event.MouseEvent e) {}
+	@Override
+	public void mouseEntered(java.awt.event.MouseEvent e) {}
+	@Override
+	public void mouseExited(java.awt.event.MouseEvent e) {}
+	@Override
+	public void mousePressed(java.awt.event.MouseEvent e) {
+		BoardCell whichBox = null;
+		for (BoardCell b: targetCells) {
+			if (b.containsClick(e.getX(), e.getY())) {
+				whichBox = b;
+				break;
+			}
+		}
+		
+		
+		// display some information just to show whether a box was clicked
+		if (whichBox != null){
+			humanPlayer.setColumn(whichBox.getRow());
+			humanPlayer.setRow(whichBox.getColumn());
+				for (BoardCell b: targetCells) {
+					b.setHighlight(false);
+				}
+				validTargetSelected = true;
+				repaint();
+		}
+		
+		else
+			JOptionPane.showMessageDialog(this, "Not a valid target selected. Please choose a valid target.", "Clue", JOptionPane.INFORMATION_MESSAGE);	
+		
+	}
+	@Override
+	public void mouseReleased(java.awt.event.MouseEvent e) {}
 }

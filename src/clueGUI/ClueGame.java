@@ -137,23 +137,37 @@ public class ClueGame extends JFrame {
 		/*if (humanMustFinish) {
 			JOptionPane.showMessageDialog(this, "Stop! Human Player Must Finish!", "Clue", JOptionPane.INFORMATION_MESSAGE);
 		}*/
-		
+		System.out.println(humanMustFinish);
 		currentPlayer = board.getPlayers().get(currentPlayerNum);
 		Random rand = new Random();
 		dieRoll = rand.nextInt(6) + 1;
 		control.dieText.setText(Integer.toString(dieRoll));
 		control.turnText.setText(currentPlayer.getPlayerName());
-		board.calcTargets(currentPlayer.getRow(), currentPlayer.getColumn(), dieRoll);
+		board.calcTargets(currentPlayer.getColumn(), currentPlayer.getRow(), dieRoll);
+		
+		//System.out.println(currentPlayer.getRow() + " " +  currentPlayer.getColumn() + " " + dieRoll);
+		
 		for (BoardCell b : board.getTargets()) {
-			System.out.println(b.getRow() + " " + b.getColumn());
+			//System.out.println(b.getRow() + " " + b.getColumn());
 		}
+		
 		if (currentPlayerNum == 0) {
-			//human
+			 int initialRow;
+			 int initialColumn;
+				initialRow = board.getHumanPlayer().getRow();
+				initialColumn = board.getHumanPlayer().getColumn();
+			board.getHumanPlayer().makeMove(board, board.getTargets());
+			if (board.validTargetSelected)
+				humanMustFinish = false;
+			
 		}
 		else {
 			//((ComputerPlayer)board.getPlayers().get(currentPlayerNum)).makeMove();
-			board.getPlayers().get(currentPlayerNum).makeMove(board, board.getTargets());
+			board.getPlayers().get(currentPlayerNum).makeMove(board.getTargets());
+			
 		}
+		
+		board.repaint();
 
 		currentPlayerNum++;
 		if (currentPlayerNum == 6) {

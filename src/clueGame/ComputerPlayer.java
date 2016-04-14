@@ -15,7 +15,7 @@ public class ComputerPlayer extends Player{
 		// TODO Auto-generated constructor stub
 	}
 
-	/*public BoardCell pickLocation(Set<BoardCell> targets) {
+	public BoardCell pickLocation(Set<BoardCell> targets) {
 		Vector<BoardCell> possibleTargets = new Vector<BoardCell>();
 		for (BoardCell c : targets) {
 			if (c.isDoorway() && c.getInitial() != lastVisited)
@@ -25,7 +25,7 @@ public class ComputerPlayer extends Player{
 		}
 		Random rand = new Random();		
 		return possibleTargets.get(rand.nextInt(possibleTargets.size()));
-	}*/
+	}
 	
 	public Solution makeAccustation(Set<Card> allCards) {
 		Solution accusation;
@@ -102,10 +102,9 @@ public class ComputerPlayer extends Player{
 	}
 	
 	@Override
-	public void makeMove(Board board, Set<BoardCell> targets) {
+	public void makeMove(Set<BoardCell> targets) {
 		BoardCell newCell = this.pickLocation(targets);
 		this.row = newCell.getRow();
 		this.column = newCell.getColumn();
-		board.repaint();
 	}
 }

@@ -2,6 +2,9 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
+
+import com.sun.javafx.geom.Rectangle;
 
 import java.awt.Graphics;
 
@@ -16,6 +19,7 @@ public class BoardCell {
 	private int doorLength = 3;
 	private boolean walkway = false;
 	private boolean nameCell = false;
+	private boolean highlight = false;
 	
 
 	public BoardCell(int row,int column){
@@ -77,6 +81,10 @@ public class BoardCell {
 		walkway = ww;
 	}
 	
+	public void setHighlight(boolean highlight) {
+		this.highlight = highlight;
+	}
+	
 	public void drawPlayer(Graphics g, Color c) {
 		Graphics2D g2 = (Graphics2D) g;
 		int x=cellWidth*column;
@@ -93,7 +101,10 @@ public class BoardCell {
 		if (walkway) {
 			g2.setColor(Color.black);
 			g2.fillRect(x, y, cellWidth, cellHeight);
-			g2.setColor(Color.yellow);
+			if (highlight) 
+				g2.setColor(Color.cyan);
+			else 
+				g2.setColor(Color.yellow);
 			g2.fillRect(x+1, y+1, cellWidth-2, cellHeight-2);
 		}
 		else {
@@ -142,6 +153,10 @@ public class BoardCell {
 		
 	}
 
-
-
+	public boolean containsClick(int mouseX, int mouseY) {
+		Rectangle rect = new Rectangle(cellHeight*column + 1, cellWidth*row + 1, cellWidth - 2, cellHeight - 2);
+		if (rect.contains(mouseX, mouseY))  
+			return true;
+		return false;
+	}
 }
