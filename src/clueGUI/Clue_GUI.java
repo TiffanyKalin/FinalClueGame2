@@ -88,6 +88,24 @@ public class Clue_GUI extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {}
 	}); 
+		
+		accusationButton.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				PlayerAccusation pacc = new PlayerAccusation(game.board);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {}
+			@Override
+			public void mouseExited(MouseEvent arg0) {}
+			@Override
+			public void mousePressed(MouseEvent arg0) {}
+			@Override
+			public void mouseReleased(MouseEvent arg0) {}
+	}); 
 		return panel;
 	}
 
@@ -114,6 +132,9 @@ public class Clue_GUI extends JPanel {
 		return panel;
 	}
 	
+	public void setGuessText(String guess) {
+		guessText.setText(guess);
+	}
 	/*public static void main(String[] args) {
 		// Create a JFrame with all the normal functionality
 		JFrame frame = new JFrame();

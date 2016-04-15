@@ -99,5 +99,15 @@ public abstract class Player {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public boolean getMakeAccu() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public Solution getSolution() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

@@ -8,10 +8,13 @@ import clueGame.*;
 
 public class ComputerPlayer extends Player{
 	private char lastVisited;	
+	private Solution compSoln;
+	private boolean makeAccu;
 	
 	public ComputerPlayer(String pName, String color, int row, int col) {
 		super(pName, color, row, col);
 		lastVisited = ' ';
+		makeAccu = false;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -27,15 +30,8 @@ public class ComputerPlayer extends Player{
 		return possibleTargets.get(rand.nextInt(possibleTargets.size()));
 	}
 	
-	public Solution makeAccustation(Set<Card> allCards) {
-		Solution accusation;
-		String weapon = "";
-		String playerName = "";
-		String room = "";
-		
-		accusation = new Solution(playerName, room, weapon);
-		return accusation;
-		
+	public void makeAccustation() {
+		makeAccu = true;
 	}
 	
 	public Solution makeSuggestion(Board board, BoardCell location, Set<Card> allCards) {
@@ -102,10 +98,31 @@ public class ComputerPlayer extends Player{
 	}
 	
 	@Override
+	public boolean getMakeAccu() {
+		// TODO Auto-generated method stub
+		return makeAccu;
+	}
+	
+	@Override
+	public Solution getSolution() {
+		// TODO Auto-generated method stub
+		return compSoln;
+	}
+	
+	
+	@Override
 	public void makeMove(Board board, Set<BoardCell> targets) {
+		if (board.compAccustation) {
+			this.makeAccustation();
+		}
 		BoardCell newCell = this.pickLocation(targets);
 		this.row = newCell.getColumn();
 		this.column = newCell.getRow();
+		if (newCell.isRoom()) {
+			lastVisited = newCell.getInitial();
+			compSoln = this.makeSuggestion(board, newCell, board.getPlayingCards());
+			board.handleSuggestion(compSoln, this.getPlayerName(), newCell);
+		}
 		ClueGame.humanMustFinish = false;
 	}
 }

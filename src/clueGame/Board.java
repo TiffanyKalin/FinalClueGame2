@@ -58,6 +58,7 @@ public class Board extends JPanel implements MouseListener{
 	private HumanPlayer humanPlayer;
 	Vector<Card> undealt;
 	boolean humanMustFinish;
+	boolean compAccustation;
 
 	public boolean isHumanMustFinish() {
 		return humanMustFinish;
@@ -81,6 +82,7 @@ public class Board extends JPanel implements MouseListener{
 
 	public void initialize(){
 		humanMustFinish = false;
+		compAccustation = false;
 		playingCards = new HashSet<Card>();
 		//load room config file
 		try {
@@ -389,6 +391,14 @@ public class Board extends JPanel implements MouseListener{
 		Card card = null;
 		boolean started = false;
 		int chosen = 0;
+		
+		for (Player p: players) {
+			if (p.getPlayerName() == suggestion.person) {
+				p.setRow(clicked.getRow());
+				p.setColumn(clicked.getColumn());
+			}
+		}
+		
 		while (true) {
 			if (players.get(chosen).getPlayerName() == accusingPlayer) {
 				if (started)					
@@ -404,6 +414,10 @@ public class Board extends JPanel implements MouseListener{
 			chosen++;
 			if (chosen >= players.size())
 				chosen = 0;
+		}
+		
+		if (card == null) {
+			compAccustation = true;
 		}
 		return card;
 	}
