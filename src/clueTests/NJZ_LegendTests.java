@@ -34,13 +34,13 @@ public class NJZ_LegendTests {
 		// from the hash, including the first and last in the file and a few others
 		assertEquals("Conservatory", rooms.get('C'));
 		assertEquals("Ballroom", rooms.get('B'));
-		assertEquals("Kitchen", rooms.get('A'));
-		assertEquals("Billiards", rooms.get('F'));
+		assertEquals("Kitchen", rooms.get('K'));
+		assertEquals("Billiards", rooms.get('R'));
 		assertEquals("Dining", rooms.get('D'));
 		assertEquals("Walkway", rooms.get('W'));
 		assertEquals("Hall", rooms.get('H'));
-		assertEquals("Lounge", rooms.get('J'));
-		assertEquals("Study", rooms.get('G'));
+		assertEquals("Lounge", rooms.get('O'));
+		assertEquals("Study", rooms.get('S'));
 	}
 	
 	// Testing bad Legend

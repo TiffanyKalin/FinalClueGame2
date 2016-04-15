@@ -47,7 +47,7 @@ public class CR_FileInitTests {
 		// from the hash, including the first and last in the file and a few others
 		assertEquals("Conservatory", rooms.get('C'));
 		assertEquals("Ballroom", rooms.get('B'));
-		assertEquals("Billiards", rooms.get('F'));
+		assertEquals("Billiards", rooms.get('R'));
 		assertEquals("Dining", rooms.get('D'));
 		assertEquals("Walkway", rooms.get('W'));
 	}
@@ -100,7 +100,7 @@ public class CR_FileInitTests {
 					numDoors++;
 			}
 		}
-		Assert.assertEquals(25, numDoors);
+		Assert.assertEquals(16, numDoors);
 	}
 
 	// Test a few room cells to ensure the room initial is correct.
