@@ -20,6 +20,8 @@ import javax.swing.border.TitledBorder;
 
 import com.sun.glass.events.MouseEvent;
 
+import clueGUI.MakingGuessPanel;
+
 import java.util.Random;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -423,6 +425,8 @@ public class Board extends JPanel implements MouseListener{
 	}
 	
 	public boolean checkAccusation(Solution accusation) {
+		JOptionPane.showMessageDialog(this, "Accusation: " + accusation.toString() 
+				+ "\nThis accusation is " + accusation.equals(theAnswer), "Clue", JOptionPane.INFORMATION_MESSAGE);
 		return (accusation.equals(theAnswer));
 	}
 	
@@ -543,7 +547,42 @@ public class Board extends JPanel implements MouseListener{
 				}
 				repaint();
 			humanMustFinish = false;
-		}
+			BoardCell humanLoc = new BoardCell(humanPlayer.getRow(), humanPlayer.getColumn());
+			if (humanLoc.isRoom()) {
+				String room = " ";
+				switch (humanLoc.getInitial()) {
+				case 'C':
+					room = "Conservatory";
+					break;
+				case 'F':
+					room = "Billiards";
+					break;
+				case 'B':
+					room = "Ballroom";
+					break;
+				case 'A':
+					room = "Kitchen";
+					break;
+				case 'I':
+					room = "Library";
+					break;
+				case 'D':
+					room = "Dining";
+					break;
+				case 'H':
+					room = "Hall";
+					break;
+				case 'J':
+					room = "Lounge";
+					break;
+				case 'G':
+					room = "Study";
+					break;
+				}
+				MakingGuessPanel mgp = new MakingGuessPanel(this, humanLoc.getInitial());
+				mgp.setVisible(true);
+				}
+			}
 		
 		else
 			JOptionPane.showMessageDialog(this, "Not a valid target selected. Please choose a valid target.", "Clue", JOptionPane.INFORMATION_MESSAGE);	

@@ -15,6 +15,7 @@ import clueGUI.MakingGuessPanel.ButtonListenerSubmit;
 import clueGUI.MakingGuessPanel.ComboListenerPerson;
 import clueGUI.MakingGuessPanel.ComboListenerWeapon;
 import clueGame.Board;
+import clueGame.Solution;
 
 public class PlayerAccusation extends JDialog {
 	Board board;
@@ -23,6 +24,7 @@ public class PlayerAccusation extends JDialog {
 	JComboBox guessR;
 	boolean personGuessed;
 	boolean weaponGuessed;
+	boolean roomGuessed;
 	
 	public PlayerAccusation (Board board) {
 		personGuessed = false;
@@ -102,15 +104,17 @@ public class PlayerAccusation extends JDialog {
 	private class ComboListenerRoom implements ActionListener {
 		  public void actionPerformed(ActionEvent e)
 		  {
-			  weaponGuessed = true;
+			  roomGuessed = true;
 			  board.getHumanPlayer().setRoomGuess(e.getSource().toString());
 		  }
 	}
 	
 	class ButtonListenerSubmit implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (personGuessed && weaponGuessed) {
+			if (personGuessed && weaponGuessed && roomGuessed) {
 				setVisible(false);
+				Solution accusation = new Solution(board.getHumanPlayer().getPersonGuess(), board.getHumanPlayer().getRoomGuess(), board.getHumanPlayer().getWeaponGuess());
+				board.checkAccusation(accusation);
 			}
 		}
 	}

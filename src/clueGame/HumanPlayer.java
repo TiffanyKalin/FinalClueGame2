@@ -39,4 +39,8 @@ public class HumanPlayer extends Player {
 	public void setRoomGuess(String roomGuess) {
 		this.roomGuess = roomGuess;
 	}
+	
+	public String getRoomGuess() {
+		return roomGuess;
+	}
 }

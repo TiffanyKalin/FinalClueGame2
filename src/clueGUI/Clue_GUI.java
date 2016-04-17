@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -94,7 +95,12 @@ public class Clue_GUI extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				PlayerAccusation pacc = new PlayerAccusation(game.board);
+				if (game.currentPlayerNum == 0) {
+					PlayerAccusation pacc = new PlayerAccusation(game.board);
+				}
+				else {
+					//JOptionPane.showMessageDialog(this, "It is not the player's turn", "Clue", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 
 			@Override

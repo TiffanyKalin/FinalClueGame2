@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import clueGame.Board;
+import clueGame.BoardCell;
+import clueGame.Solution;
 
 public class MakingGuessPanel extends JDialog {
 	Board board;
@@ -19,6 +21,7 @@ public class MakingGuessPanel extends JDialog {
 	JComboBox guessW;
 	boolean personGuessed;
 	boolean weaponGuessed;
+	String room;
 	
 	public MakingGuessPanel(Board board, char roomInitial) {
 		personGuessed = false;
@@ -30,7 +33,7 @@ public class MakingGuessPanel extends JDialog {
 		JLabel person = new JLabel("Person");
 		JLabel weapon = new JLabel("Weapon");
 		
-		String room = " ";
+		room = " ";
 		switch (roomInitial) {
 		case 'C':
 			room = "Conservatory";
@@ -119,6 +122,7 @@ public class MakingGuessPanel extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			if (personGuessed && weaponGuessed) {
 				setVisible(false);
+				board.handleSuggestion(new Solution(board.getHumanPlayer().getPersonGuess(), board.getHumanPlayer().getWeaponGuess(), room), board.getHumanPlayer().getPlayerName(), new BoardCell(board.getHumanPlayer().getRow(), board.getHumanPlayer().getColumn()));
 			}
 		}
 	}

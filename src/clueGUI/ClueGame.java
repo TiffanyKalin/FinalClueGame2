@@ -153,48 +153,9 @@ public class ClueGame extends JFrame {
 		}*/
 		board.getPlayers().get(currentPlayerNum).makeMove(board, board.getTargets());
 		
-		if (currentPlayer == board.getHumanPlayer()) {
-			BoardCell humanLoc = new BoardCell(board.getHumanPlayer().getRow(), board.getHumanPlayer().getColumn());
-			if (humanLoc.isRoom()) {
-				String room = " ";
-				switch (humanLoc.getInitial()) {
-				case 'C':
-					room = "Conservatory";
-					break;
-				case 'F':
-					room = "Billiards";
-					break;
-				case 'B':
-					room = "Ballroom";
-					break;
-				case 'A':
-					room = "Kitchen";
-					break;
-				case 'I':
-					room = "Library";
-					break;
-				case 'D':
-					room = "Dining";
-					break;
-				case 'H':
-					room = "Hall";
-					break;
-				case 'J':
-					room = "Lounge";
-					break;
-				case 'G':
-					room = "Study";
-					break;
-				}
-				MakingGuessPanel mgp = new MakingGuessPanel(board, humanLoc.getInitial());
-				mgp.setVisible(true);
-				board.handleSuggestion(new Solution(board.getHumanPlayer().getPersonGuess(), board.getHumanPlayer().getWeaponGuess(), room), board.getHumanPlayer().getPlayerName(), humanLoc);
-			}
-		}
-		
 		if (currentPlayer.getMakeAccu() && currentPlayer != board.getHumanPlayer()) {
-			JOptionPane.showMessageDialog(this, "Accusation: " + currentPlayer.getSolution().toString() 
-					+ "\nThis accusation is " + board.checkAccusation(currentPlayer.getSolution()), "Clue", JOptionPane.INFORMATION_MESSAGE);
+			Solution accu = new Solution(currentPlayer.getSolution().person, currentPlayer.getSolution().room, currentPlayer.getSolution().weapon);
+			board.checkAccusation(accu);
 		}
 		board.repaint();
 
