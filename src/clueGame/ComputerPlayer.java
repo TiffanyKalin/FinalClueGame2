@@ -111,7 +111,7 @@ public class ComputerPlayer extends Player{
 	
 	
 	@Override
-	public void makeMove(Board board, Set<BoardCell> targets) {
+	public void makeMove(Board board, Set<BoardCell> targets, clueGUI.ClueGame game) {
 		if (board.compAccustation) {
 			this.makeAccustation();
 		}
@@ -121,7 +121,7 @@ public class ComputerPlayer extends Player{
 		if (newCell.isRoom()) {
 			lastVisited = newCell.getInitial();
 			compSoln = this.makeSuggestion(board, newCell, board.getPlayingCards());
-			board.handleSuggestion(compSoln, this.getPlayerName(), newCell);
+			game.GameHandleSuggestion(compSoln, this, newCell);
 		}
 		ClueGame.humanMustFinish = false;
 	}

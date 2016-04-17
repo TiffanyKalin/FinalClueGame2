@@ -61,6 +61,7 @@ public class Board extends JPanel implements MouseListener{
 	Vector<Card> undealt;
 	boolean humanMustFinish;
 	boolean compAccustation;
+	clueGUI.ClueGame clueGamePlayed;
 
 	public boolean isHumanMustFinish() {
 		return humanMustFinish;
@@ -425,7 +426,7 @@ public class Board extends JPanel implements MouseListener{
 	}
 	
 	public boolean checkAccusation(Solution accusation) {
-		JOptionPane.showMessageDialog(this, "Accusation: " + accusation.toString() 
+		JOptionPane.showMessageDialog(this, "Accusation: " + accusation.person + " with the " + accusation.weapon + " in the " + accusation.room 
 				+ "\nThis accusation is " + accusation.equals(theAnswer), "Clue", JOptionPane.INFORMATION_MESSAGE);
 		return (accusation.equals(theAnswer));
 	}
@@ -445,7 +446,8 @@ public class Board extends JPanel implements MouseListener{
 		}
 	}
 
-	public void highlightTargets(Set<BoardCell> targets) {
+	public void highlightTargets(Set<BoardCell> targets, clueGUI.ClueGame game) {
+		clueGamePlayed = game;
 		if (targets != null) {
 			for (BoardCell b: targets) {
 				b.setHighlight(true);
@@ -579,7 +581,7 @@ public class Board extends JPanel implements MouseListener{
 					room = "Study";
 					break;
 				}
-				MakingGuessPanel mgp = new MakingGuessPanel(this, humanLoc.getInitial());
+				MakingGuessPanel mgp = new MakingGuessPanel(this, humanLoc.getInitial(), clueGamePlayed);
 				mgp.setVisible(true);
 				}
 			}

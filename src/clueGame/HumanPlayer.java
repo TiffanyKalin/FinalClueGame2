@@ -15,8 +15,9 @@ public class HumanPlayer extends Player {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void makeMove(Board board, Set<BoardCell> targets) {	
-		board.highlightTargets(targets);
+	@Override
+	public void makeMove(Board board, Set<BoardCell> targets, clueGUI.ClueGame game) {	
+		board.highlightTargets(targets, game);
 	}
 
 	public void setPersonGuess(String personGuess) {

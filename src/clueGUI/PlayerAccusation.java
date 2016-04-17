@@ -19,9 +19,9 @@ import clueGame.Solution;
 
 public class PlayerAccusation extends JDialog {
 	Board board;
-	JComboBox guessP;
-	JComboBox guessW;
-	JComboBox guessR;
+	JComboBox<String> guessP;
+	JComboBox<String> guessW;
+	JComboBox<String> guessR;
 	boolean personGuessed;
 	boolean weaponGuessed;
 	boolean roomGuessed;
@@ -31,12 +31,12 @@ public class PlayerAccusation extends JDialog {
 		weaponGuessed = false;
 		this.board = board;
 		setLayout(new GridLayout(4,2));
-		JPanel panel = new JPanel();
-		JLabel roomLabel = new JLabel("Your room");
+		JLabel roomLabel = new JLabel("Room");
 		JLabel person = new JLabel("Person");
 		JLabel weapon = new JLabel("Weapon");
 		
-		JComboBox Rguess = new JComboBox();
+		guessR = new JComboBox<String>();
+		guessR.addItem("");
 		guessR.addItem("Kitchen");
 		guessR.addItem("Dining Room");
 		guessR.addItem("Lounge");
@@ -45,9 +45,12 @@ public class PlayerAccusation extends JDialog {
 		guessR.addItem("Hall");
 		guessR.addItem("Study");
 		guessR.addItem("Library");
-		guessR.addItem("Billiard Room");	
+		guessR.addItem("Billiard Room");
+		ComboListenerRoom Rlistener = new ComboListenerRoom();
+		guessR.addActionListener(Rlistener);
 		
-		guessP = new JComboBox();
+		guessP = new JComboBox<String>();
+		guessP.addItem("");
 		guessP.addItem("Miss Scarlett");		
 		guessP.addItem("Colonel Mustard");
 		guessP.addItem("Mr. Green");
@@ -57,7 +60,8 @@ public class PlayerAccusation extends JDialog {
 		ComboListenerPerson Plistener = new ComboListenerPerson();
 		guessP.addActionListener(Plistener);
 		
-		guessW = new JComboBox();
+		guessW = new JComboBox<String>();
+		guessW.addItem("");
 		guessW.addItem("Candlestick");
 		guessW.addItem("Knife");
 		guessW.addItem("Lead Pipe");
@@ -72,16 +76,17 @@ public class PlayerAccusation extends JDialog {
 		submit.addActionListener(new ButtonListenerSubmit());
 		cancel.addActionListener(new ButtonListenerCancel());
 		
-		panel.add(roomLabel);
-		panel.add(person);
-		panel.add(weapon);
-		panel.add(submit);
-		panel.add(guessR);
-		panel.add(guessP);
-		panel.add(guessW);
-		panel.add(cancel);
+		add(roomLabel);
+		add(guessR);
+		add(person);
+		add(guessP);
+		add(weapon);
+		add(guessW);
+		add(submit);
+		add(cancel);
 		
-		setSize(200, 200);
+		setTitle("Accusation");
+		setSize(300, 300);
 		setVisible(true);
 	}
 
@@ -89,7 +94,7 @@ public class PlayerAccusation extends JDialog {
 		  public void actionPerformed(ActionEvent e)
 		  {
 			  personGuessed = true;
-			  board.getHumanPlayer().setPersonGuess(e.getSource().toString());
+			  board.getHumanPlayer().setPersonGuess(guessP.getSelectedItem().toString());
 		  }
 	}
 
@@ -97,7 +102,7 @@ public class PlayerAccusation extends JDialog {
 		  public void actionPerformed(ActionEvent e)
 		  {
 			  weaponGuessed = true;
-			  board.getHumanPlayer().setWeaponGuess(e.getSource().toString());
+			  board.getHumanPlayer().setWeaponGuess(guessW.getSelectedItem().toString());
 		  }
 	}
 	
@@ -105,7 +110,7 @@ public class PlayerAccusation extends JDialog {
 		  public void actionPerformed(ActionEvent e)
 		  {
 			  roomGuessed = true;
-			  board.getHumanPlayer().setRoomGuess(e.getSource().toString());
+			  board.getHumanPlayer().setRoomGuess(guessR.getSelectedItem().toString());
 		  }
 	}
 	

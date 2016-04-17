@@ -20,8 +20,8 @@ import clueGUI.ClueGame;
 public class Clue_GUI extends JPanel {
 	public JTextField turnText;
 	public JTextField dieText;
-	private JTextField guessText;
-	private JTextField resultText;
+	public JTextField guessText;
+	public JTextField resultText;
 	private ClueGame game;
 
 	public Clue_GUI(ClueGame game)
@@ -95,12 +95,7 @@ public class Clue_GUI extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if (game.currentPlayerNum == 0) {
-					PlayerAccusation pacc = new PlayerAccusation(game.board);
-				}
-				else {
-					//JOptionPane.showMessageDialog(this, "It is not the player's turn", "Clue", JOptionPane.INFORMATION_MESSAGE);
-				}
+				game.MakeAccu();
 			}
 
 			@Override

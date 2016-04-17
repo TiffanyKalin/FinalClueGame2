@@ -24,7 +24,7 @@ import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame {
 	public static boolean humanMustFinish;
-	Clue_GUI control;
+	public Clue_GUI control;
 	Board board;
 	Player currentPlayer;
 	int currentPlayerNum;
@@ -151,7 +151,7 @@ public class ClueGame extends JFrame {
 		for (BoardCell b : board.getTargets()) {
 			//System.out.println(b.getRow() + " " + b.getColumn());
 		}*/
-		board.getPlayers().get(currentPlayerNum).makeMove(board, board.getTargets());
+		board.getPlayers().get(currentPlayerNum).makeMove(board, board.getTargets(), this);
 		
 		if (currentPlayer.getMakeAccu() && currentPlayer != board.getHumanPlayer()) {
 			Solution accu = new Solution(currentPlayer.getSolution().person, currentPlayer.getSolution().room, currentPlayer.getSolution().weapon);
@@ -166,7 +166,25 @@ public class ClueGame extends JFrame {
 		
 	}
 	
+	public void MakeAccu() {
+		if (currentPlayer == board.getHumanPlayer()) {
+			PlayerAccusation pacc = new PlayerAccusation(board);
+			pacc.setVisible(true);
+		}
+		else {
+			JOptionPane.showMessageDialog(this, "It is not the human player's turn", "Clue", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+	}
 
+	public void GameHandleSuggestion(Solution soln, Player playerCalling, BoardCell playerLoc) {
+		Card card = board.handleSuggestion(soln, playerCalling.getPlayerName(), playerLoc);
+		control.guessText.setText(soln.toString());
+		if (card != null) 
+			control.resultText.setText(card.toString());
+		else 
+			control.resultText.setText("no new card");
+	}
 
 	public static void main(String[] args) {
 		ClueGame clue = new ClueGame();

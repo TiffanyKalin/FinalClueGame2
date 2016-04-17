@@ -17,18 +17,19 @@ import clueGame.Solution;
 
 public class MakingGuessPanel extends JDialog {
 	Board board;
-	JComboBox guessP;
-	JComboBox guessW;
+	JComboBox<String> guessP;
+	JComboBox<String> guessW;
 	boolean personGuessed;
 	boolean weaponGuessed;
+	clueGUI.ClueGame clueGame;
 	String room;
 	
-	public MakingGuessPanel(Board board, char roomInitial) {
+	public MakingGuessPanel(Board board, char roomInitial, clueGUI.ClueGame clueGame) {
+		this.clueGame = clueGame;
 		personGuessed = false;
 		weaponGuessed = false;
 		this.board = board;
 		setLayout(new GridLayout(4,2));
-		JPanel panel = new JPanel();
 		JLabel roomLabel = new JLabel("Your room");
 		JLabel person = new JLabel("Person");
 		JLabel weapon = new JLabel("Weapon");
@@ -64,7 +65,8 @@ public class MakingGuessPanel extends JDialog {
 			break;
 		}
 		JLabel roomName = new JLabel(room);
-		guessP = new JComboBox();
+		guessP = new JComboBox<String>();
+		guessP.addItem("");
 		guessP.addItem("Miss Scarlett");		
 		guessP.addItem("Colonel Mustard");
 		guessP.addItem("Mr. Green");
@@ -74,7 +76,8 @@ public class MakingGuessPanel extends JDialog {
 		ComboListenerPerson Plistener = new ComboListenerPerson();
 		guessP.addActionListener(Plistener);
 		
-		guessW = new JComboBox();
+		guessW = new JComboBox<String>();
+		guessW.addItem("");
 		guessW.addItem("Candlestick");
 		guessW.addItem("Knife");
 		guessW.addItem("Lead Pipe");
@@ -89,16 +92,17 @@ public class MakingGuessPanel extends JDialog {
 		submit.addActionListener(new ButtonListenerSubmit());
 		cancel.addActionListener(new ButtonListenerCancel());
 		
-		panel.add(roomLabel);
-		panel.add(person);
-		panel.add(weapon);
-		panel.add(submit);
-		panel.add(roomName);
-		panel.add(guessP);
-		panel.add(guessW);
-		panel.add(cancel);
+		add(roomLabel);
+		add(roomName);
+		add(person);
+		add(guessP);
+		add(weapon);
+		add(guessW);
+		add(submit);
+		add(cancel);
 		
-		setSize(200, 200);
+		setTitle("Suggestion");
+		setSize(300, 300);
 		setVisible(true);
 	}
 	
@@ -106,7 +110,7 @@ public class MakingGuessPanel extends JDialog {
 		  public void actionPerformed(ActionEvent e)
 		  {
 			  personGuessed = true;
-			  board.getHumanPlayer().setPersonGuess(e.getSource().toString());
+			  board.getHumanPlayer().setPersonGuess(guessP.getSelectedItem().toString());
 		  }
 	}
 
@@ -114,7 +118,7 @@ public class MakingGuessPanel extends JDialog {
 		  public void actionPerformed(ActionEvent e)
 		  {
 			  weaponGuessed = true;
-			  board.getHumanPlayer().setWeaponGuess(e.getSource().toString());
+			  board.getHumanPlayer().setWeaponGuess(guessW.getSelectedItem().toString());
 		  }
 	}
 	
@@ -122,7 +126,7 @@ public class MakingGuessPanel extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			if (personGuessed && weaponGuessed) {
 				setVisible(false);
-				board.handleSuggestion(new Solution(board.getHumanPlayer().getPersonGuess(), board.getHumanPlayer().getWeaponGuess(), room), board.getHumanPlayer().getPlayerName(), new BoardCell(board.getHumanPlayer().getRow(), board.getHumanPlayer().getColumn()));
+				clueGame.GameHandleSuggestion(new Solution(board.getHumanPlayer().getPersonGuess(), board.getHumanPlayer().getWeaponGuess(), room), board.getHumanPlayer(), new BoardCell(board.getHumanPlayer().getRow(), board.getHumanPlayer().getColumn()));	
 			}
 		}
 	}

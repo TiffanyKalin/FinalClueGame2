@@ -95,7 +95,7 @@ public abstract class Player {
 		this.seenCards.add(card);
 	}
 
-	public void makeMove(Board board, Set<BoardCell> targets) {
+	public void makeMove(Board board, Set<BoardCell> targets, clueGUI.ClueGame clueGame) {
 		// TODO Auto-generated method stub
 		
 	}
