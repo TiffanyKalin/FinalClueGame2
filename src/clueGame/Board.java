@@ -17,8 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.AncestorListener;
 
 import com.sun.glass.events.MouseEvent;
+import com.sun.xml.internal.ws.api.Component;
 
 import clueGUI.MakingGuessPanel;
 
@@ -458,7 +460,8 @@ public class Board extends JPanel implements MouseListener{
 		//System.out.println(humanPlayer.getRow() + humanPlayer.getColumn());
 		addMouseListener(this);
 		//System.out.println(humanPlayer.getRow() + humanPlayer.getColumn());
-		
+		//removeMouseListener(this);
+
 	}
 	
 	public Set<BoardCell> getTargets(){
@@ -555,9 +558,11 @@ public class Board extends JPanel implements MouseListener{
 				}
 			}
 		
-		else
+		else{
 			JOptionPane.showMessageDialog(this, "Not a valid target selected. Please choose a valid target.", "Clue", JOptionPane.INFORMATION_MESSAGE);	
-		
+			((java.awt.Component) e.getSource()).addMouseListener(this);
+		}
+		((java.awt.Component) e.getSource()).removeMouseListener(this);
 	}
 	@Override
 	public void mouseReleased(java.awt.event.MouseEvent e) {}
