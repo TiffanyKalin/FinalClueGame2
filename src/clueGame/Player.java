@@ -109,5 +109,10 @@ public abstract class Player {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void makeAccustation(boolean makeAccu) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

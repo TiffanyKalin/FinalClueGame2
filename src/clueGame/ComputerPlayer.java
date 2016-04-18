@@ -30,8 +30,9 @@ public class ComputerPlayer extends Player{
 		return possibleTargets.get(rand.nextInt(possibleTargets.size()));
 	}
 	
-	public void makeAccustation() {
-		makeAccu = true;
+	@Override
+	public void makeAccustation(boolean makeAccu) {
+		this.makeAccu = makeAccu;
 	}
 	
 	public Solution makeSuggestion(Board board, BoardCell location, Set<Card> allCards) {
@@ -113,7 +114,7 @@ public class ComputerPlayer extends Player{
 	@Override
 	public void makeMove(Board board, Set<BoardCell> targets, clueGUI.ClueGame game) {
 		if (board.compAccustation) {
-			this.makeAccustation();
+			this.makeAccustation(true);
 			board.compAccustation = false;
 		}
 		BoardCell newCell = this.pickLocation(targets);
