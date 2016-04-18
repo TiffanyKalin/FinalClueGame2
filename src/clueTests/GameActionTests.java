@@ -261,8 +261,8 @@ public class GameActionTests {
 		redPlayer.seeCard(studyCard);
 
 		//makes sure suggestion created is expected suggestion
-		Solution answer = new Solution("Colonel Mustard", "Kitchen", "Dagger"); 
-		Solution suggestion = redPlayer.makeSuggestion(board,board.getCellAt(1, 1), deal);
+		Solution answer = new Solution("Colonel Mustard", "Conservatory", "Dagger"); 
+		Solution suggestion = redPlayer.makeSuggestion(board,board.getCellAt(19, 0), deal);
 		assertEquals(answer.room, suggestion.room);
 		assertEquals(answer.weapon, suggestion.weapon);
 		assertEquals(answer.person, suggestion.person);
@@ -278,11 +278,11 @@ public class GameActionTests {
 		redPlayer.seeCard(studyCard);
 		boolean isScarlett = false;
 		boolean isMustard = false;
-		Solution answer = new Solution("Colonel Mustard", "Kitchen", "Dagger");  
+		Solution answer = new Solution("Colonel Mustard", "Conservatory", "Dagger");  
 
 		//for loop testing that each person card is selected at least once 
 		for (int i = 0; i < 100; i++) {		
-			Solution suggestion = redPlayer.makeSuggestion(board,board.getCellAt(1, 1), deal);
+			Solution suggestion = redPlayer.makeSuggestion(board,board.getCellAt(19, 0), deal);
 			if (suggestion.person == "Colonel Mustard")
 				isMustard = true;
 			else if (suggestion.person == "Miss Scarlett") 
