@@ -196,5 +196,10 @@ public class ClueGame extends JFrame {
 		
 	}
 
+	public Player getCurrentPlayer() {
+		// TODO Auto-generated method stub
+		return currentPlayer;
+	}
+
 
 }

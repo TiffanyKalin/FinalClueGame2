@@ -397,8 +397,8 @@ public class Board extends JPanel implements MouseListener{
 		
 		for (Player p: players) {
 			if (p.getPlayerName() == suggestion.person) {
-				p.setRow(clicked.getRow());
-				p.setColumn(clicked.getColumn());
+				p.setRow(clicked.getColumn());
+				p.setColumn(clicked.getRow());
 			}
 		}
 		
@@ -457,6 +457,7 @@ public class Board extends JPanel implements MouseListener{
 		humanMustFinish = true;
 		//System.out.println(humanPlayer.getRow() + humanPlayer.getColumn());
 		addMouseListener(this);
+
 		//System.out.println(humanPlayer.getRow() + humanPlayer.getColumn());
 		
 	}
@@ -549,39 +550,8 @@ public class Board extends JPanel implements MouseListener{
 				}
 				repaint();
 			humanMustFinish = false;
-			BoardCell humanLoc = new BoardCell(humanPlayer.getRow(), humanPlayer.getColumn());
-			if (humanLoc.isRoom()) {
-				String room = " ";
-				switch (humanLoc.getInitial()) {
-				case 'C':
-					room = "Conservatory";
-					break;
-				case 'F':
-					room = "Billiards";
-					break;
-				case 'B':
-					room = "Ballroom";
-					break;
-				case 'A':
-					room = "Kitchen";
-					break;
-				case 'I':
-					room = "Library";
-					break;
-				case 'D':
-					room = "Dining";
-					break;
-				case 'H':
-					room = "Hall";
-					break;
-				case 'J':
-					room = "Lounge";
-					break;
-				case 'G':
-					room = "Study";
-					break;
-				}
-				MakingGuessPanel mgp = new MakingGuessPanel(this, humanLoc.getInitial(), clueGamePlayed);
+			if (whichBox.isRoom() && clueGamePlayed.getCurrentPlayer().equals(this.humanPlayer)) {
+				MakingGuessPanel mgp = new MakingGuessPanel(this, whichBox.getInitial(), clueGamePlayed);
 				mgp.setVisible(true);
 				}
 			}

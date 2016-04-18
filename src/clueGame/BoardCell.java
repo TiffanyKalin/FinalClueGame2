@@ -17,7 +17,7 @@ public class BoardCell {
 	private int cellWidth = 25;
 	private int cellHeight = 25;	
 	private int doorLength = 3;
-	private boolean walkway = false;
+	private boolean walkway;
 	private boolean nameCell = false;
 	private boolean highlight = false;
 	
@@ -25,6 +25,7 @@ public class BoardCell {
 	public BoardCell(int row,int column){
 		this.row = row;
 		this.column = column;
+		walkway = false;
 	}
 
 	@Override

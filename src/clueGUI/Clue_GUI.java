@@ -114,7 +114,7 @@ public class Clue_GUI extends JPanel {
 	public JPanel createGuessPanel() {
 		JPanel panel = new JPanel();
 		JLabel nameLabel =  new JLabel("Guess");
-		guessText = new JTextField(15);
+		guessText = new JTextField(25);
 		panel.add(nameLabel);
 		panel.add(guessText);
 		panel.setBorder(new TitledBorder (new EtchedBorder(), "Guess"));
@@ -125,7 +125,7 @@ public class Clue_GUI extends JPanel {
 		JPanel panel = new JPanel();
 		JLabel guessLabel =  new JLabel("Guess");
 		guessLabel = new JLabel("Response");
-		resultText = new JTextField(5);
+		resultText = new JTextField(15);
 		resultText.setEditable(false);
 		panel.add(guessLabel);
 		panel.add(resultText);

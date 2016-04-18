@@ -39,16 +39,16 @@ public class MakingGuessPanel extends JDialog {
 		case 'C':
 			room = "Conservatory";
 			break;
-		case 'F':
+		case 'R':
 			room = "Billiards";
 			break;
 		case 'B':
 			room = "Ballroom";
 			break;
-		case 'A':
+		case 'K':
 			room = "Kitchen";
 			break;
-		case 'I':
+		case 'L':
 			room = "Library";
 			break;
 		case 'D':
@@ -57,10 +57,10 @@ public class MakingGuessPanel extends JDialog {
 		case 'H':
 			room = "Hall";
 			break;
-		case 'J':
+		case 'O':
 			room = "Lounge";
 			break;
-		case 'G':
+		case 'S':
 			room = "Study";
 			break;
 		}
@@ -103,7 +103,6 @@ public class MakingGuessPanel extends JDialog {
 		
 		setTitle("Suggestion");
 		setSize(300, 300);
-		setVisible(true);
 	}
 	
 	public class ComboListenerPerson implements ActionListener {
@@ -126,7 +125,7 @@ public class MakingGuessPanel extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			if (personGuessed && weaponGuessed) {
 				setVisible(false);
-				clueGame.GameHandleSuggestion(new Solution(board.getHumanPlayer().getPersonGuess(), board.getHumanPlayer().getWeaponGuess(), room), board.getHumanPlayer(), new BoardCell(board.getHumanPlayer().getRow(), board.getHumanPlayer().getColumn()));	
+				clueGame.GameHandleSuggestion(new Solution(board.getHumanPlayer().getPersonGuess(), room, board.getHumanPlayer().getWeaponGuess()), board.getHumanPlayer(), new BoardCell(board.getHumanPlayer().getRow(), board.getHumanPlayer().getColumn()));	
 			}
 		}
 	}

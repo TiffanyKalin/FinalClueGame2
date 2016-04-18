@@ -59,16 +59,16 @@ public class ComputerPlayer extends Player{
 			case 'C':
 				room = "Conservatory";
 				break;
-			case 'F':
+			case 'R':
 				room = "Billiards";
 				break;
 			case 'B':
 				room = "Ballroom";
 				break;
-			case 'A':
+			case 'K':
 				room = "Kitchen";
 				break;
-			case 'I':
+			case 'L':
 				room = "Library";
 				break;
 			case 'D':
@@ -77,10 +77,10 @@ public class ComputerPlayer extends Player{
 			case 'H':
 				room = "Hall";
 				break;
-			case 'J':
+			case 'O':
 				room = "Lounge";
 				break;
-			case 'G':
+			case 'S':
 				room = "Study";
 				break;
 			}
@@ -114,6 +114,7 @@ public class ComputerPlayer extends Player{
 	public void makeMove(Board board, Set<BoardCell> targets, clueGUI.ClueGame game) {
 		if (board.compAccustation) {
 			this.makeAccustation();
+			board.compAccustation = false;
 		}
 		BoardCell newCell = this.pickLocation(targets);
 		this.row = newCell.getColumn();

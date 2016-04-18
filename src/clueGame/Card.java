@@ -20,4 +20,9 @@ public class Card {
 	public String getCardName() {
 		return cardName;
 	}
+	
+	@Override
+	public String toString() {
+		return cardName;
+	}
 }

@@ -14,7 +14,7 @@ public class Solution {
 
 	@Override
 	public String toString() {
-		return "Solution [person=" + person + ", room=" + room + ", weapon=" + weapon + "]";
+		return  person + " in the " + room + " with the " + weapon;
 	}
 
 	
