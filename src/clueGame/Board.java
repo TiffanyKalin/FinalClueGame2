@@ -457,7 +457,6 @@ public class Board extends JPanel implements MouseListener{
 		humanMustFinish = true;
 		//System.out.println(humanPlayer.getRow() + humanPlayer.getColumn());
 		addMouseListener(this);
-
 		//System.out.println(humanPlayer.getRow() + humanPlayer.getColumn());
 		
 	}
@@ -550,7 +549,7 @@ public class Board extends JPanel implements MouseListener{
 				}
 				repaint();
 			humanMustFinish = false;
-			if (whichBox.isRoom() && clueGamePlayed.getCurrentPlayer().equals(this.humanPlayer)) {
+			if (whichBox.isRoom()) {
 				MakingGuessPanel mgp = new MakingGuessPanel(this, whichBox.getInitial(), clueGamePlayed);
 				mgp.setVisible(true);
 				}
