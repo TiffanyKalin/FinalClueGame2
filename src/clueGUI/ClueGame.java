@@ -151,17 +151,9 @@ public class ClueGame extends JFrame {
 		for (BoardCell b : board.getTargets()) {
 			//System.out.println(b.getRow() + " " + b.getColumn());
 		}*/
-<<<<<<< HEAD
 		if (currentPlayer != board.getHumanPlayer() && board.isCompAccustation() && currentPlayer.getSolution() != null) {
 			board.checkAccusation(currentPlayer.getSolution());
 			board.setCompAccustation(false);
-=======
-		if (currentPlayer.getMakeAccu() && currentPlayer != board.getHumanPlayer()) {
-			System.out.println(currentPlayer.getMakeAccu());
-			Solution accu = new Solution(currentPlayer.getSolution().person, currentPlayer.getSolution().room, currentPlayer.getSolution().weapon);
-			board.checkAccusation(accu);
-			currentPlayer.makeAccustation(false);
->>>>>>> 9f4077c05366915805bf1ece5581f4288dd5d53c
 		}
 		
 		board.getPlayers().get(currentPlayerNum).makeMove(board, board.getTargets(), this);
