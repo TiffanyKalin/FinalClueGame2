@@ -113,10 +113,6 @@ public class ComputerPlayer extends Player{
 	
 	@Override
 	public void makeMove(Board board, Set<BoardCell> targets, clueGUI.ClueGame game) {
-		if (board.compAccustation) {
-			this.makeAccustation(true);
-			board.compAccustation = false;
-		}
 		BoardCell newCell = this.pickLocation(targets);
 		this.row = newCell.getColumn();
 		this.column = newCell.getRow();

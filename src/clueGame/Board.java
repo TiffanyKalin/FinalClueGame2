@@ -62,7 +62,7 @@ public class Board extends JPanel implements MouseListener{
 	private HumanPlayer humanPlayer;
 	Vector<Card> undealt;
 	boolean humanMustFinish;
-	boolean compAccustation;
+	private boolean compAccustation;
 	clueGUI.ClueGame clueGamePlayed;
 
 	public boolean isHumanMustFinish() {
@@ -87,7 +87,7 @@ public class Board extends JPanel implements MouseListener{
 
 	public void initialize(){
 		humanMustFinish = false;
-		compAccustation = false;
+		setCompAccustation(false);
 		playingCards = new HashSet<Card>();
 		//load room config file
 		try {
@@ -422,7 +422,7 @@ public class Board extends JPanel implements MouseListener{
 		}
 		
 		if (card == null) {
-			compAccustation = true;
+			setCompAccustation(true);
 		}
 		return card;
 	}
@@ -566,4 +566,12 @@ public class Board extends JPanel implements MouseListener{
 	}
 	@Override
 	public void mouseReleased(java.awt.event.MouseEvent e) {}
+
+	public boolean isCompAccustation() {
+		return compAccustation;
+	}
+
+	public void setCompAccustation(boolean compAccustation) {
+		this.compAccustation = compAccustation;
+	}
 }
